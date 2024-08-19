@@ -25,8 +25,8 @@ export default function SolanaWallet( { mnemonic }: { mnemonic: string } ) {
     }
     return(
         <div>
-            <button onClick={createKeys}>Add Solana Wallet</button>
-            {publicKeys.map(p=> <div>{p.toString()}</div>)}
+            <button className="bg-black text-white rounded-full m-4 p-4 hover:bg-slate-800" onClick={createKeys}>Add Solana Wallet</button>
+            {publicKeys.map(p=> <li className="font-mono">{p.toString()}</li>)}
         </div>
     )
 }

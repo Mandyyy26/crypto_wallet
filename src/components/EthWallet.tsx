@@ -22,8 +22,8 @@ export default function EthWallet({mnemonic}: {mnemonic: string}) {
     }
     return(
         <div>
-        <button onClick={createKeys}>Add Eherum Wallet</button>
-        {publicKeys.map(p=> <div>Eth - {p.toString()}</div>)}
+        <button className="bg-black text-white rounded-full m-4 p-4 hover:bg-slate-800" onClick={createKeys}>Add Eherum Wallet</button>
+        <div>{publicKeys.map(p=> <li className="font-mono">Eth - {p.toString()}</li>)}</div>
         </div>
     )
 }

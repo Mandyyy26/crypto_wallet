@@ -3,7 +3,6 @@ import { mnemonicToSeedSync } from "bip39";
 import { useState } from "react";
 import { HDNodeWallet } from "ethers";
 import { Wallet } from "ethers";
-import { set } from "mongoose";
 
 export default function EthWallet({mnemonic}: {mnemonic: string}) {
     const [publicKeys,setPublicKeys] = useState<string[]>([]);

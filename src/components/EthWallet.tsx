@@ -10,6 +10,10 @@ export default function EthWallet({mnemonic}: {mnemonic: string}) {
     const [currIndex,setCurrIndex] = useState(0);
 
     function createKeys(){
+        if(mnemonic === "" || mnemonic.split(" ").length !== 12){
+            alert("Please enter a Mnemonic Phrase");
+            return;
+        }
         const seed = mnemonicToSeedSync(mnemonic);
         const path = `m/44'/60'/${currIndex}'/0'`;
         const hdNode = HDNodeWallet.fromSeed(seed);
@@ -24,10 +28,10 @@ export default function EthWallet({mnemonic}: {mnemonic: string}) {
     }
     return(
         <div>
-        <button className="bg-black text-white rounded-full m-4 p-4 hover:bg-slate-800" onClick={createKeys}>Add Eherum Wallet</button>
+        <button className="bg-black text-white rounded-full m-4 p-4 hover:bg-slate-800" onClick={createKeys}>Add Etherum Wallet</button>
         <div className="grid grid-cols-2 gap-1">
-                <div>{publicKeys.map(p=> <li className="font-mono"><b className="text-purple-700">Public key  <br /></b> ETH- {p.toString()}</li>)}</div>
-                <div>{privateKeys.map(p=> <li className="font-mono"><b className="text-green-600">Private key <br /></b>{p.toString()}</li>)}</div>
+                <div>{publicKeys.map(p=> <li className="font-mono p-4"><b className="text-purple-700">Public key  <br /></b> ETH- {p.toString()}</li>)}</div>
+                <div>{privateKeys.map(p=> <li className="font-mono p-4"><b className="text-green-600">Private key <br /></b>{p.toString()}</li>)}</div>
             </div>
         </div>
     )

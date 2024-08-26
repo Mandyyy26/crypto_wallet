@@ -6,7 +6,6 @@ import { Wallet } from "ethers";
 
 export default function EthWallet({mnemonic}: {mnemonic: string}) {
     const [publicKeys,setPublicKeys] = useState<string[]>([]);
-    const [privateKeys,setPrivateKeys] = useState<string[]>([]);
     const [currIndex,setCurrIndex] = useState(0);
 
     function createKeys(){
@@ -21,7 +20,6 @@ export default function EthWallet({mnemonic}: {mnemonic: string}) {
         const privateKey = child.privateKey;
         const wallet = new Wallet(privateKey);
 
-        setPrivateKeys([...privateKeys, wallet.privateKey]);
         setPublicKeys([...publicKeys, wallet.address]);
         setCurrIndex(currIndex+1);
 
@@ -29,9 +27,13 @@ export default function EthWallet({mnemonic}: {mnemonic: string}) {
     return(
         <div>
         <button className="bg-black text-white rounded-full m-4 p-4 hover:bg-slate-800" onClick={createKeys}>Add Etherum Wallet</button>
-        <div className="grid grid-cols-2 gap-1">
-                <div>{publicKeys.map(p=> <li className="font-mono p-4"><b className="text-purple-700">Public key  <br /></b> ETH- {p.toString()}</li>)}</div>
-                <div>{privateKeys.map(p=> <li className="font-mono p-4"><b className="text-green-600">Private key <br /></b>{p.toString()}</li>)}</div>
+         <button className="m-2 p-2 bg-red-800 rounded-lg text-white hover:bg-red-600" onClick={()=>{
+            setPublicKeys([]);
+            setCurrIndex(0);
+         }}>Reset</button>
+        <div className="text-center">
+                <div>{publicKeys.map(p=> <li className="font-mono p-4"><b className="text-purple-700">Public key  <br /></b> ETH- {p.toString()}  <button  className="bg-green-700 text-white m-4 p-4 rounded-full hover:bg-green-900">check Balance</button></li>)}</div>
+                
             </div>
         </div>
     )
